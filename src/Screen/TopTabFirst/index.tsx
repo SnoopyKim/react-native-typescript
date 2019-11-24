@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, Button } from 'react-native';
+import { Text, Button, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components/native';
 import { NavigationScreenProp, NavigationState } from 'react-navigation';
+import { ActionSheet } from 'native-base';
 
 const Container = styled.View`
 	flex: 1;
@@ -34,6 +35,9 @@ const TopTapFirst = ({ navigation }: Props) => {
 		navigation.navigate('Auth');
 	};
 
+	const ActionButtons = [ 'English', 'Japanese', 'Korean', 'Cancel' ];
+	const cancelButtonIndex = ActionButtons.length - 1;
+
 	return (
 		<Container>
 			<Text>TopTabFirst Screen</Text>
@@ -46,6 +50,20 @@ const TopTapFirst = ({ navigation }: Props) => {
 			<Button
 				title="navigate third bottom tab"
 				onPress={_navigateThirdBottomTab}
+			/>
+			<Button
+				title="ActionSheet"
+				onPress={() =>
+					ActionSheet.show(
+						{
+							options: ActionButtons,
+							cancelButtonIndex: cancelButtonIndex,
+							destructiveButtonIndex: cancelButtonIndex,
+						},
+						(buttonIndex: number) => {
+							console.log(buttonIndex);
+						}
+					)}
 			/>
 			<Button title="Logout" onPress={_logout} />
 		</Container>
