@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components/native';
 import { NavigationScreenProp, NavigationState } from 'react-navigation';
+import SplashScreen from 'react-native-splash-screen';
 
 const Container = styled.View`
 	flex: 1;
@@ -23,6 +24,7 @@ const AuthLoadingScreen = ({ navigation }: Props) => {
 	useEffect(() => {
 		setTimeout(() => {
 			_bootstrapAsync();
+			SplashScreen.hide();
 		}, 1000);
 	}, []);
 
